@@ -1,0 +1,130 @@
+CREATE TABLE persons(
+	id serial primary key,
+	name varchar(255),
+	lastname varchar(255),
+	cedula varchar(9),
+	address varchar(255),
+	email varchar(40),
+	phone varchar(12),
+	birthday date
+)
+
+CREATE TABLE rols (
+	id serial primary key,
+	description varchar(255)
+)
+
+
+CREATE TABLE users(
+	id serial primary key,
+	persons_id integer references persons(id),
+	username varchar(255),
+	password varchar(255),
+	rols_id integer references rols(id)
+)
+
+CREATE TABLE status(
+	id serial primary key,
+	description varchar(255)
+)
+
+CREATE TABLE categories(
+	id serial primary key,
+	description varchar(255)
+)
+
+CREATE TABLE providers (
+	id serial primary key,
+	name varchar(255),
+	address varchar(255),
+	phone varchar(12),
+	email varchar(40),
+	since date
+)
+
+CREATE TABLE rawmaterials (
+	id serial primary key,
+	description varchar(255),
+	quantity integer,
+	providers_id integer references providers(id)
+)
+
+CREATE TABLE clients(
+	id serial primary key,
+	users_id integer references users(id)
+)
+
+
+CREATE TABLE products (
+	id serial primary key,
+	name varchar(255),
+	description varchar(255),
+	categories_id integer references categories(id),
+	status_id integer references status(id)
+)
+
+CREATE TABLE requesttypes (
+	id serial primary key,
+	description varchar(255)
+)
+
+CREATE TABLE contactmessages(
+	id serial primary key,
+	users_id integer references users(id),
+	message varchar(255),
+	date date
+)
+
+CREATE TABLE paymentmethods(
+	id serial primary key,
+	description varchar(255)
+)
+
+CREATE TABLE requests(
+        id serial primary key,
+        users_id integer references users(id),
+        date date,
+        status_id integer references status(id)
+)
+
+CREATE TABLE devolutiontypes(
+	id serial primary key,
+	description varchar(255)
+)
+
+CREATE TABLE feedbacks(
+        id serial primary key,
+        requests_id integer references requests(id),
+        feedback varchar(255)
+)
+
+CREATE TABLE meditions (
+	id serial primary key,
+	description varchar(255)
+)
+
+CREATE TABLE products_materials(
+        id serial primary key,
+        products_id integer references products(id),
+        rawmaterials_id integer references rawmaterials(id),
+        quantity integer,
+        meditions_id integer references meditions(id)
+)
+
+CREATE TABLE products_requests(
+        id serial primary key,
+        products_id integer references products(id),
+        requests_id integer references requests(id)
+)
+
+CREATE TABLE devolutions(
+        id serial primary key,
+        products_requests_id integer references products_requests(id),
+        date date
+)
+
+CREATE TABLE bills(
+        id serial primary key,
+        requests_id integer references requests(id),
+        paymentmethods_id integer references paymentmethods(id)
+)
