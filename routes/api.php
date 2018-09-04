@@ -25,3 +25,7 @@ Route::post('/products','productsController@store');
 
 //Materials routes
 Route::get('/materials','materialsController@index');
+
+//Auth routes
+Route::post('/login','usersController@login');
+Route::post('/register','usersController@register');

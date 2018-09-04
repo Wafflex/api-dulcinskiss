@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Products;
@@ -8,6 +8,6 @@ use App\Models\Products;
 class Categories extends Model
 {
     public function products(){
-        return $this->belongsTo(Products::class,'status_id');
+        return $this->hasMany(Products::class,'id');
     }
 }

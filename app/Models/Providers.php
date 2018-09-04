@@ -14,6 +14,6 @@ class Providers extends Model
     public $timestamps = false;
 
     public function materials(){
-        return $this->belongsToMany(Materials::class,'providers_id');
+        return $this->hasMany(Materials::class,'id');
     }
 }

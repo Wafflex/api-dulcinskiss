@@ -20,12 +20,15 @@ class productsController extends Controller
     public function index()
     {
         $products = $this->model->getProducts();
+        //$products = $this->model::find(1);
 
         if (count($products) > 0){
-            return $this->json->sendSuccess($products);
+            $this->json->data = $products;
         }else{
-            return $this->json->sendError('No hay nada que ofrecer',404);
+            $this->json->message = "No hay nada para ofrecer";
         }
+
+        return $this->json->sendResponse();
         
     }
 

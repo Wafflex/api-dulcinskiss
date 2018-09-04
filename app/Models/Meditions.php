@@ -14,6 +14,6 @@ class Meditions extends Model
     public $timestamps = false;
 
     public function materials(){
-        return $this->belongsToMany(Materials::class,'meditions_id');
+        return $this->hasMany(Materials::class,'meditions_id');
     }
 }
