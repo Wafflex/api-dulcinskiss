@@ -29,6 +29,19 @@ class usersController extends Controller
     }
 
     public function register(Request $request){
+
+    	$user = new Users();
+
+
+
+    	$user->persons_id = 2;
+    	$user->username = $request->username;
+    	$user->password = "asdasd";//Hash::make($request->password);
+    	$user->rols_id = 2;
+    	$user->email = $request->email;
+
+    	$user->save();
+    	return $user;
     	$dbuser = $this->model->register($request);
     	return $dbuser;
     }

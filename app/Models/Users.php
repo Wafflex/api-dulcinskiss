@@ -72,19 +72,27 @@ class users extends Model
     	$client->phone = $person->phone;
     	$client->birthday = $person->birthday;
 
+    	//return $client;
+
     	$client->save();
+
+
+
 
     	$user = new Users();
 
-    	$user->persons_id = $client->id;
+    	return $user;
+
+    	//$user->persons_id = $client->id;
     	$user->username = $person->username;
     	$user->password = Hash::make($person->password);
     	$user->rols_id = 2;
     	$user->email = $person->email;
 
+		return $user;
     	$user->save();
 
-    	//return "User successfully created";
+    	return "User successfully created";
     }
 
 }
